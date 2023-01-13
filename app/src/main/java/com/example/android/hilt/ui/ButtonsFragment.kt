@@ -28,13 +28,16 @@ import com.example.android.hilt.R
 import com.example.android.hilt.data.LoggerLocalDataSource
 import com.example.android.hilt.navigator.AppNavigator
 import com.example.android.hilt.navigator.Screens
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 /**
  * Fragment that displays buttons whose interactions are recorded.
  */
+@AndroidEntryPoint
 class ButtonsFragment : Fragment() {
 
-    private lateinit var logger: LoggerLocalDataSource
+    @Inject lateinit var logger: LoggerLocalDataSource
     private lateinit var navigator: AppNavigator
 
     override fun onCreateView(
@@ -52,9 +55,6 @@ class ButtonsFragment : Fragment() {
     }
 
     private fun populateFields(context: Context) {
-        logger = (context.applicationContext as LogApplication).
-            serviceLocator.loggerLocalDataSource
-
         navigator = (context.applicationContext as LogApplication).
             serviceLocator.provideNavigator(requireActivity())
     }
